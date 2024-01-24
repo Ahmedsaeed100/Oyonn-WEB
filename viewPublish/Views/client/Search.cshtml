@@ -1,0 +1,55 @@
+﻿
+
+@using OyonnBL.DTO;
+@model IEnumerable<clientDTO>
+@{
+    /**/
+
+    var client_status = ViewBag.client_status;
+
+
+}
+
+    <table class="table" id="datable_1">
+        <thead>
+            <tr>
+                <th>اسم العميل</th>
+                <th>حالة العميل</th>
+                <th>هاتف العميل</th>
+                <th>موقع العميل</th>
+                <th>تاريخ تسجيل العميل</th>
+                <th>محلات العميل</th>
+
+                <th>التحكم</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@Html.DisplayFor(MODELitem => item.client_name)</td>
+                <td>
+                    @Html.DisplayFor(MODELitem => item.client_status.client_status1)
+                </td>
+                <td>@Html.DisplayFor(MODELitem => item.client_mobile)</td>
+                <td>@Html.DisplayFor(MODELitem => item.client_location)</td>
+                <td>@Html.DisplayFor(MODELitem => item.client_registration_date)</td>
+                <td><button type="button" class="btn btn-default waves-effect m-r-20" data-toggle="modal" data-target="#largeModal" onclick="client_shopDataLoad(@item.client_id);">اظهار</button></td>
+
+
+
+
+
+ 
+
+
+                <td><button type="button" class="btn btn-default waves-effect m-r-20" data-toggle="modal"onclick="editclient(@item.client_id,@item.client_status_id)" data-target="#largeModal222">تعديل</button></td>
+
+                
+            </tr>
+
+            }
+        </tbody>
+    </table>
+    
+    

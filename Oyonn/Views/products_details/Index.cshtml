@@ -1,0 +1,424 @@
+﻿@using OyonnBL.DTO;
+@{
+    ViewBag.Title = "products_details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var product = ViewBag.product;
+
+
+}
+@section style{
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- Favicon-->
+    <link rel="stylesheet" href="/Content/Cpanel/assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Content/Cpanel/assets/plugins/dropzone/dropzone.css">
+    <link rel="stylesheet" href="/Content/Cpanel/assets/plugins/morrisjs/morris.css" />
+    <!-- Bootstrap Material Datetime Picker Css -->
+    <link href="/Content/Cpanel/assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+    <!-- Wait Me Css -->
+    <link href="/Content/Cpanel/assets/plugins/waitme/waitMe.css" rel="stylesheet" />
+    <!-- Bootstrap Select Css -->
+    <link href="/Content/Cpanel/assets/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+    <!-- Sweetalert Css -->
+    <link href="/Content/Cpanel/assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="/Content/Cpanel/assets/css/main.css">
+    <link rel="stylesheet" href="/Content/Cpanel/assets/css/blog.css">
+    <link rel="stylesheet" href="/Content/Cpanel/assets/css/color_skins.css">
+    <link rel="stylesheet" href="/Content/Cpanel/assets/plugins/footable-bootstrap/css/footable.bootstrap.min.css">
+    <link rel="stylesheet" href="/Content/Cpanel/assets/plugins/footable-bootstrap/css/footable.standalone.min.css">
+
+    <style>
+        #popup {
+            display: none;
+            position: fixed;
+            margin: 0 auto;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+        }
+    </style>
+
+
+}
+
+<div id="popup">
+
+    <img src="~/Content/ajax_loader_gray_128.gif" style="width:100%;height:auto" />
+</div>
+<div class="modal fade" id="largeModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="largeModalLabel">تفاصيل المنتجات</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+                            <div class="body">
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane in active" id="home_with_icon_title">
+                                        <p>
+                                            <div class="row clearfix">
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <div class="panel-group" id="accordion_1" role="tablist" aria-multiselectable="true">
+                                                        @*<div class="panel panel-primary">
+                                                                <div class="panel-heading" role="tab" id="headingOne_1">
+                                                                    <h4 class="panel-title"> <a role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseOne_1" aria-expanded="true" aria-controls="collapseOne_1"> Title </a> </h4>
+                                                                </div>
+                                                                <div id="collapseOne_1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne_1">
+                                                                    <div class="panel-body" id="NewsDetailsTitle">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>*@
+                                                        @*<div class="panel panel-primary">
+                                                                <div class="panel-heading" role="tab" id="headingTwo_1">
+                                                                    <h4 class="panel-title">
+                                                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseTwo_1" aria-expanded="false"
+                                                                           aria-controls="collapseTwo_1">Date</a>
+                                                                    </h4>
+                                                                </div>
+                                                                <div id="collapseTwo_1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo_1">
+                                                                    <div class="panel-body" id="NewsDetailsDate">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>*@
+                                                        @*<div class="panel panel-primary">
+                                                                <div class="panel-heading" role="tab" id="headingThree_1">
+                                                                    <h4 class="panel-title">
+                                                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseThree_1" aria-expanded="false"
+                                                                           aria-controls="collapseThree_1">Details</a>
+                                                                    </h4>
+                                                                </div>
+                                                                <div id="collapseThree_1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree_1">
+                                                                    <div class="panel-body" id="NewsDetailsDetails">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>*@
+                                                        <div class="panel panel-primary">
+                                                            <div class="panel-heading" role="tab" id="headingThree_5">
+                                                                <h4 class="panel-title">
+                                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseThree_5" aria-expanded="false"
+                                                                       aria-controls="collapseThree_1">صورة المنتج</a>
+                                                                </h4>
+                                                            </div>
+                                                            <div id="collapseThree_5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree_1">
+                                                                <div class="panel-body">
+                                                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 m-b-20"> <img class="img-fluid img-thumbnail" src="" alt="" id="NewsDetailsIMG"> </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="content blog-page">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-7 col-md-6 col-sm-12">
+                <h2>
+                    اضافة تفاصيل المنتجات
+                </h2>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                <ul class="breadcrumb float-md-right">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> القائمة الرئسية</a></li>
+                    <li class="breadcrumb-item"><a href="#">تفاصيل المنتجات</a></li>
+                    @*<li class="breadcrumb-item active">اضافة شركتد</li>*@
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+
+                    @using (Ajax.BeginForm("Postproducts_details", new AjaxOptions
+                    {
+                        HttpMethod = "POST",
+                        UpdateTargetId = "alldata",
+                        InsertionMode = InsertionMode.Replace,
+                        OnFailure = "OnFailure(xhr, status, error)",
+                        OnSuccess = "confirmsave()"
+                    }))
+                    {
+                        <div class="body">
+                            <form class="form-horizontal">
+                                <div class="row clearfix">
+                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                        <label> اسم المنتج</label>
+                                    </div>
+                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <select class="form-control show-tick" data-live-search="true" name="product_id" id="product_id">
+
+                                                    <option>اختار اسم المنتج</option>
+                                                    @foreach (var item in product)
+                                                    {
+                                                        <option value="@Convert.ToInt16(@item.product_id)">@item.product_name_ar</option>
+                                                    }
+
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                        <label>الاسم عربي</label>
+                                    </div>
+                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" placeholder="ادخل الاسم يالعربيه" id="product_name_ar" name="product_name_ar">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                        <label>الاسم انجليزي</label>
+                                    </div>
+                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <input type="text" class="form-control" placeholder="ادخل الاسم بالانجلزية" id="product_name_en" name="product_name_en">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                        <label>كمية المنتج</label>
+                                    </div>
+                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <input type="number" min="0" class="form-control" placeholder="ادخل كمية المنتج" id="product_quantity" name="product_quantity">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                        <label>سعر المنتج</label>
+                                    </div>
+                                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                        <div class="form-group">
+                                            <div class="form-line">
+                                                <input type="number" min="0"  step="0.25" class="form-control" placeholder="ادخل سعر المنتج" id="product_price" name="product_price">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row clearfix">
+                                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                        <label>صورة المنتج</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-8 col-xs-7">
+                                        <br />
+                                        <input class="form-control" type="file" accept="image/*" onchange="UserIMG(this)" />
+                                        <br />
+                                        <img src="~/Content/noimg.png" style="width:300px;height:300px;" id="blah" />
+                                    </div>
+                                    @*<div class="col-lg-2 col-md-10 col-sm-8 col-xs-7">
+                                            <br />
+                                            <button>Preview</button>
+                                        </div>*@
+                                </div>
+                                <input type="hidden" value="0" class="hiddenId" name="product_img" id="Photo" />
+                                <input type="hidden" value="0" class="hiddenId" name="product_details_id" id="product_details_id" />
+                            </form>
+                            <div class="row clearfix  js-sweetalert">
+                                <div class="col-lg-12">
+                                    <button type="submit" class="btn btn-raised btn-primary m-t-30 waves-effect">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="content">
+
+    <div class="container-fluid">
+        <!-- Basic Table -->
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <h2> قائمة تفاصيل المنتجات</h2>
+                        <ul class="header-dropdown m-r--5">
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="zmdi zmdi-more-vert"></i> </a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a href="javascript:void(0);">Action</a></li>
+                                    <li><a href="javascript:void(0);">Another action</a></li>
+                                    <li><a href="javascript:void(0);">Something else here</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="table-wrap mt-40">
+                        <div class="body table-responsive">
+                            <div id="alldata">@Html.Partial("Allproducts_details")</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+@section scripts{
+
+    <script src="/Content/Cpanel/assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
+    <script src="/Content/Cpanel/assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
+    <script src="/Content/Cpanel/assets/plugins/sweetalert/sweetalert.min.js"></script> <!-- SweetAlert Plugin Js -->
+    <script src="/Content/Cpanel/assets/js/pages/ui/dialogs.js"></script>
+    <script src="/Content/Cpanel/assets/plugins/dropzone/dropzone.js"></script> <!-- Dropzone Plugin Js -->
+    <script src="/Content/Cpanel/assets/plugins/ckeditor/ckeditor.js"></script> <!-- Ckeditor -->
+    <script src="/Content/Cpanel/assets/plugins/autosize/autosize.js"></script> <!-- Autosize Plugin Js -->
+    <script src="/Content/Cpanel/assets/plugins/momentjs/moment.js"></script> <!-- Moment Plugin Js -->
+    <!-- Bootstrap Material Datetime Picker Plugin Js -->
+    <script src="/Content/Cpanel/assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+    <script src="/Content/Cpanel/assets/bundles/mainscripts.bundle.js"></script><!-- Custom Js -->
+    <script src="/Content/Cpanel/assets/js/pages/forms/editors.js"></script>
+    <script src="/Content/Cpanel/assets/js/pages/forms/basic-form-elements.js"></script>
+    <script src="/Content/Cpanel/assets/bundles/footable.bundle.js"></script> Scripts Plugin Js -->
+
+    <script src="/Content/Cpanel/assets/bundles/mainscripts.bundle.js"></script><!-- Custom Js -->
+    <script src="/Content/Cpanel/assets/js/pages/tables/footable.js"></script><!-- Custom Js -->
+    @* <script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/SwwetAlert2.min.all.js"></script>
+
+
+
+
+    <script src="~/Scripts/General.js"></script>
+   
+    <script src="~/Scripts/products_details.js"></script>
+    <script>
+        Delete();
+        var UserPhoto = 0;
+        function UserIMG(input) {
+            UserPhoto = 0;
+            var sizeKB = input.files[0].size / 1024 / 1024;
+            if (sizeKB > 2) {
+                alert("Please Choose Item Less Than 2 Mega");
+                input.value = '';
+                return;
+            }
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var extension = '';
+                UserPhoto = e.target.result;
+                                                                         /*   extension = UserPhoto.split(',')[1]*/;
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(300)
+                    .height(200);
+                UserPhoto = e.target.result;
+
+                $("#Photo").val(UserPhoto)
+
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+        function confirmsave() {
+            Swal.fire(
+                'Information',
+                'تم الحفظ بنجاح',
+                'success'
+            );
+            //window.location = "/SignUp/Login";
+            ClearData();
+        };
+
+        function OnFailure(xhr, status, error) {
+            // Your error handling logic here..
+            var errorsString = "";
+
+            var response = $.parseJSON(xhr.responseText);
+
+            errorsString = response;
+            ////DISPLAY THE LIST OF ERROR MESSAGES
+            if (errorsString != "") {
+
+                $(window).scrollTop(0);
+
+                Swal.fire({
+                    position: '',
+                    type: 'error',
+                    title: errorsString,
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+
+            }
+        };
+        var activeAjaxCount = 0;
+        //  alert("ss");
+        $(function () {
+
+            $(document).ajaxSend(function () {
+                //alert(activeAjaxCount);
+                activeAjaxCount++;
+
+                $('#popup').show();
+            });
+
+            $(document).ajaxComplete(function () {
+                activeAjaxCount--;
+                if (activeAjaxCount <= 0) {
+                    jQuery('#popup').fadeOut(500);
+                }
+            });
+
+        })
+
+    </script>
+
+
+
+}

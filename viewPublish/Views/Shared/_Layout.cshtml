@@ -1,0 +1,185 @@
+﻿@using OyonnBL.DTO;
+@{
+
+    AdminDTO useres = ((AdminDTO)Session["UserData"]);
+}
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="description" content="Responsive Bootstrap 4 and web Application ui kit.">
+    <title>Control panel</title>
+
+    @RenderSection("style", required: false)
+    <style>
+        .Active1 {
+            background-color: #C3C4CF;
+        }
+    </style>
+</head>
+<body class="theme-black">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <p>Please wait...</p>
+            <div class="m-t-30"><img src="/Content/Cpanel/assets/images/logo.svg" width="48" height="48" alt="Nexa"></div>
+        </div>
+    </div>
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div><!-- Search  -->
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="col-12">
+
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" href="#">لوحة التحكم</a>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="@Url.Action("LogOut","Admin")">تسجيل خروج</a></li>
+                @* <li><a href="sign-in.html" class="mega-menu" data-close="true"><i class="zmdi zmdi-power"></i></a></li>*@
+                <li class=""><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="zmdi zmdi-settings zmdi-hc-spin"></i></a></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Left Sidebar -->
+    <aside id="leftsidebar" class="sidebar">
+        <!-- User Info -->
+        <div class="user-info">
+            <div class="info-container">
+                <div class="name" data-toggle="dropdown"></div>
+
+                <div class="email">@useres.AdminName</div>
+            </div>
+        </div>
+        <!-- #User Info -->
+        <!-- Menu -->
+        <div class="menu">
+            <ul class="list">
+                <li class=""><strong>القائمة الرئسية</strong></li>
+
+                <li> <a id="client" href="@Url.Action("Index", "client")"><i class="zmdi zmdi-swap-alt"></i></i><strong>العملاء</strong></a></li>
+                <li> <a id="order" href="@Url.Action("Index", "order")"><i class="zmdi zmdi-swap-alt"></i></i><strong>الطلبيات</strong></a></li>
+                <li> <a id="company" href="@Url.Action("Index", "company")"><i class="zmdi zmdi-swap-alt"></i></i><strong>الشركات</strong></a></li>
+                <li> <a id="products" href="@Url.Action("Index", "products")"><i class="zmdi zmdi-swap-alt"></i><span>المنتجات</span></a></li>
+                <li> <a id="products_details" href="@Url.Action("Index", "products_details")"><i class="zmdi zmdi-swap-alt"></i><span>تفاصيل المنتج</span></a></li>
+                @*<li> <a href="/ContactUS/Index"><i class="zmdi zmdi-swap-alt"></i><span>Contact us</span></a></li>
+                <li> <a href="/Survey/Index"><i class="zmdi zmdi-swap-alt"></i><span>Survey</span></a></li>
+                <li> <a href="contact_us_MSG.html"><i class="zmdi zmdi-swap-alt"></i><span>Contact us Messages</span></a></li>
+                <li> <a href="Terms_Conditions.html"><i class="zmdi zmdi-swap-alt"></i><span>Terms & Conditions</span></a></li>
+                <li> <a href="Privacy_Policy.html"><i class="zmdi zmdi-swap-alt"></i><span>Privacy Policy</span></a></li>*@
+            </ul>
+        </div>
+        <!-- #Menu -->
+    </aside>
+    <!-- Right Sidebar -->
+    <aside id="rightsidebar" class="right-sidebar">
+        <ul class="nav nav-tabs">
+            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#skins">Skins</a></li>
+        </ul>
+        <div class="tab-content">
+
+            <div role="tabpanel" class="tab-pane in active in active slideRight" id="skins">
+                <div class="slim_scroll">
+                    <h6>Flat Color</h6>
+                    <ul class="choose-skin">
+                        <li data-theme="purple">
+                            <div class="purple"></div>
+                            <span>Purple</span>
+                        </li>
+                        <li data-theme="blue">
+                            <div class="blue"></div>
+                            <span>Blue</span>
+                        </li>
+                        <li data-theme="cyan">
+                            <div class="cyan"></div>
+                            <span>Cyan</span>
+                        </li>
+                    </ul>
+                    <h6>Multi Color</h6>
+                    <ul class="choose-skin">
+                        <li data-theme="black">
+                            <div class="black"></div>
+                            <span>Black</span>
+                        </li>
+                        <li data-theme="deep-purple">
+                            <div class="deep-purple"></div>
+                            <span>Deep Purple</span>
+                        </li>
+                        <li data-theme="red">
+                            <div class="red"></div>
+                            <span>Red</span>
+                        </li>
+                    </ul>
+                    <h6>Gradient Color</h6>
+                    <ul class="choose-skin">
+                        <li data-theme="green">
+                            <div class="green"></div>
+                            <span>Green</span>
+                        </li>
+                        <li data-theme="orange" class="active">
+                            <div class="orange"></div>
+                            <span>Orange</span>
+                        </li>
+                        <li data-theme="blush">
+                            <div class="blush"></div>
+                            <span>Blush</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </aside>
+    <!-- Main Content -->
+
+    @RenderBody()
+
+
+    @*<script src="/Content/Cpanel/assets/bundles/libscripts.bundle.js"></script>*@
+    <!-- Lib Scripts Plugin Js -->
+    @*<script src="/Content/Cpanel/assets/bundles/libscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
+
+        <script src="/Content/Cpanel/assets/plugins/jquery/jquery-v3.2.1.min.js"></script>
+        <script src="/Content/Cpanel/assets/bundles/vendorscripts.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
+        <script src="/Content/Cpanel/assets/plugins/sweetalert/sweetalert.min.js"></script> <!-- SweetAlert Plugin Js -->
+        <script src="/Content/Cpanel/assets/js/pages/ui/dialogs.js"></script>
+        <script src="/Content/Cpanel/assets/plugins/dropzone/dropzone.js"></script> <!-- Dropzone Plugin Js -->
+        <script src="/Content/Cpanel/assets/plugins/ckeditor/ckeditor.js"></script> <!-- Ckeditor -->
+        <script src="/Content/Cpanel/assets/plugins/autosize/autosize.js"></script> <!-- Autosize Plugin Js -->
+        <script src="/Content/Cpanel/assets/plugins/momentjs/moment.js"></script> <!-- Moment Plugin Js -->
+        <!-- Bootstrap Material Datetime Picker Plugin Js -->
+        <script src="/Content/Cpanel/assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+        <script src="/Content/Cpanel/assets/bundles/mainscripts.bundle.js"></script><!-- Custom Js -->
+        <script src="/Content/Cpanel/assets/js/pages/forms/editors.js"></script>
+        <script src="/Content/Cpanel/assets/js/pages/forms/basic-form-elements.js"></script>
+        <script src="/Content/Cpanel/assets/bundles/datatablescripts.bundle.js"></script>
+        <script src="/Content/Cpanel/assets/plugins/jquery-datatable/buttons/dataTables.buttons.min.js"></script>
+        <script src="/Content/Cpanel/assets/plugins/jquery-datatable/buttons/buttons.bootstrap4.min.js"></script>
+        <script src="/Content/Cpanel/assets/plugins/jquery-datatable/buttons/buttons.colVis.min.js"></script>
+        <script src="/Content/Cpanel/assets/plugins/jquery-datatable/buttons/buttons.flash.min.js"></script>
+        <script src="/Content/Cpanel/assets/plugins/jquery-datatable/buttons/buttons.html5.min.js"></script>
+        <script src="/Content/Cpanel/assets/plugins/jquery-datatable/buttons/buttons.print.min.js"></script>
+        <script src="/Content/Cpanel/assets/js/pages/ui/dialogs.js"></script>
+
+        <script src="/Content/Cpanel/assets/js/pages/tables/jquery-datatable.js"></script>*@
+    @RenderSection("scripts", required: false)
+    <script>
+        $(document).ready(function () {
+            var path = window.location.pathname.substring(1);
+            
+            path = path.substring(0, path.length - 5);
+         
+            var pathShort = path.substring(0,path.indexOf("/"));
+           
+            var activeLink = document.getElementById(pathShort);
+            activeLink.classList.add("Active1");
+        });
+    </script>
+</body>
+</html>

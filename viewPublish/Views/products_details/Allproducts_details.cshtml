@@ -1,0 +1,46 @@
+﻿
+@using OyonnBL.DTO;
+@model IEnumerable<products_detailsDTO>
+<table class="table table-striped" id="datable_1">
+    <thead>
+        <tr>
+            <th>اسم المنتج</th>
+            <th>الاسم بالعربي</th>
+            <th>الاسم بالانجلزية</th>
+            <th>كمية المنتج</th>
+            <th>سعر المنتج</th>
+            <th>باقي التفاصيل</th>
+            <th>التحكم</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(MODELitem => item.product.product_name_ar)</td>
+                <td>@Html.DisplayFor(MODELitem => item.product_name_ar)</td>
+                <td>@Html.DisplayFor(MODELitem => item.product_name_en)</td>
+                <td>@Html.DisplayFor(MODELitem => item.product_quantity)</td>
+                <td>@Html.DisplayFor(MODELitem => item.product_price)</td>
+
+                
+                <td><button type="button" class="btn btn-default waves-effect m-r-20" data-toggle="modal" data-target="#largeModal" onclick="product_detailsIMG(@item.product_details_id)">اظهار</button></td>
+                <td>
+
+
+                    <button type="button" class="btn bg-blue" onclick="Getproducts_detailsData(@item.product_details_id)">تعديل</button>
+                    <button type="button" class="btn bg-red js-delete" data-id="@item.product_details_id" id="deletebtn">حذف</button>
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+<script type="text/javascript">
+    $(function () {
+
+        $('#datable_1').DataTable();
+    });
+
+    Delete();
+</script>

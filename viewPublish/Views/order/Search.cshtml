@@ -1,0 +1,62 @@
+﻿
+
+@using OyonnBL.DTO;
+@model IEnumerable<orderDTO>
+@{
+    /**/
+
+    var Orders_Status = ViewBag.Orders_Status;
+
+
+}
+
+<table class="table" id="datable_1">
+    <thead>
+        <tr>
+            <th>اجمالي الطلبيه</th>
+            <th>تاريخ الطلبيه</th>
+            <th>وقت الطلبيه</th>
+            <th>تاريخ وصول الطلبيه</th>
+            <th>وقت وصول الطلبيه</th>
+
+            <th>حالة الطلبيه</th>
+            <th>اسم العميل </th>
+            <th>اسم المحل </th>
+            <th>تفاصيل</th>
+            <th>التحكم</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(MODELitem => item.total_orders_price)</td>
+                <td>
+                    @Html.DisplayFor(MODELitem => item.order_date)
+                </td>
+                <td>@Html.DisplayFor(MODELitem => item.order_time)</td>
+                <td>@Html.DisplayFor(MODELitem => item.order_delivery_date)</td>
+                <td>@Html.DisplayFor(MODELitem => item.order_delivery_time)</td>
+                <td>@Html.DisplayFor(MODELitem => item.Orders_Status.Status)</td>
+                <td>@Html.DisplayFor(MODELitem => item.client_shop.client_name)</td>
+                <td>@Html.DisplayFor(MODELitem => item.client_shop.shop_Name)</td>
+                <td><button type="button" class="btn btn-default waves-effect m-r-20" data-toggle="modal" data-target="#largeModal" onclick="order_detailsbyorder_id(@item.order_id);">اظهار</button></td>
+
+
+
+
+
+
+
+
+                <td><button type="button" class="btn btn-default waves-effect m-r-20" data-toggle="modal" onclick="editclient(@item.order_id,@item.Orders_StatusID)" data-target="#largeModal222">تعديل</button></td>
+
+
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+
+

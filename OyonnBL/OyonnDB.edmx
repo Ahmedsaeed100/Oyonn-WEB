@@ -1,0 +1,781 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="oyonnModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Adminid" />
+          </Key>
+          <Property Name="Adminid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdminName" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="loginDate" Type="datetime" />
+          <Property Name="login_time" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="area">
+          <Key>
+            <PropertyRef Name="area_id" />
+          </Key>
+          <Property Name="area_id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="area_name" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="city">
+          <Key>
+            <PropertyRef Name="city_id" />
+          </Key>
+          <Property Name="city_id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="city_name" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="client">
+          <Key>
+            <PropertyRef Name="client_id" />
+          </Key>
+          <Property Name="client_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="client_status_id" Type="tinyint" />
+          <Property Name="client_name" Type="nvarchar" MaxLength="30" />
+          <Property Name="client_mobile" Type="nvarchar" MaxLength="15" />
+          <Property Name="client_location" Type="nvarchar" MaxLength="250" />
+          <Property Name="client_registration_date" Type="date" />
+        </EntityType>
+        <EntityType Name="client_shop">
+          <Key>
+            <PropertyRef Name="shop_id" />
+          </Key>
+          <Property Name="shop_id" Type="int" Nullable="false" />
+          <Property Name="client_id" Type="int" />
+          <Property Name="shop_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="shop_img" Type="nvarchar" MaxLength="75" />
+          <Property Name="area_id" Type="smallint" />
+          <Property Name="city_id" Type="smallint" />
+          <Property Name="Shop_mobile" Type="nvarchar" MaxLength="15" />
+          <Property Name="shop_phone" Type="nvarchar" MaxLength="15" />
+          <Property Name="shop_address" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="client_status">
+          <Key>
+            <PropertyRef Name="client_status_id" />
+          </Key>
+          <Property Name="client_status_id" Type="tinyint" Nullable="false" />
+          <Property Name="client_status" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="companies">
+          <Key>
+            <PropertyRef Name="company_id" />
+          </Key>
+          <Property Name="company_id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_name_ar" Type="nvarchar" MaxLength="20" />
+          <Property Name="company_name_en" Type="nvarchar" MaxLength="20" />
+          <Property Name="company_img" Type="nvarchar" MaxLength="150" />
+          <Property Name="company_phone" Type="nvarchar" MaxLength="15" />
+          <Property Name="company_mobile" Type="nvarchar" MaxLength="15" />
+          <Property Name="company_address" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="order_details">
+          <Key>
+            <PropertyRef Name="order_details_id" />
+          </Key>
+          <Property Name="order_details_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order_id" Type="bigint" />
+          <Property Name="product_details_id" Type="int" />
+          <Property Name="order_quantity" Type="tinyint" />
+          <Property Name="order_price" Type="decimal" Precision="8" Scale="2" />
+        </EntityType>
+        <EntityType Name="orders">
+          <Key>
+            <PropertyRef Name="order_id" />
+          </Key>
+          <Property Name="order_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="shop_id" Type="int" />
+          <Property Name="total_orders_price" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="order_date" Type="date" />
+          <Property Name="order_time" Type="time" Precision="7" />
+          <Property Name="order_delivery_date" Type="date" />
+          <Property Name="order_delivery_time" Type="time" Precision="7" />
+          <Property Name="Orders_StatusID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders_Status">
+          <Key>
+            <PropertyRef Name="Orders_StatusID" />
+          </Key>
+          <Property Name="Orders_StatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="products">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="product_name_ar" Type="nvarchar" MaxLength="20" />
+          <Property Name="product_name_en" Type="nvarchar" MaxLength="20" />
+          <Property Name="company_id" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="products_details">
+          <Key>
+            <PropertyRef Name="product_details_id" />
+          </Key>
+          <Property Name="product_details_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="product_id" Type="smallint" />
+          <Property Name="product_name_ar" Type="nvarchar" MaxLength="50" />
+          <Property Name="product_name_en" Type="nvarchar" MaxLength="50" />
+          <Property Name="product_img" Type="nvarchar" MaxLength="100" />
+          <Property Name="product_quantity" Type="int" />
+          <Property Name="product_price" Type="decimal" Precision="8" Scale="2" />
+        </EntityType>
+        <Association Name="FK_client_client_status">
+          <End Role="client_status" Type="Self.client_status" Multiplicity="0..1" />
+          <End Role="client" Type="Self.client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client_status">
+              <PropertyRef Name="client_status_id" />
+            </Principal>
+            <Dependent Role="client">
+              <PropertyRef Name="client_status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_client_shop_area">
+          <End Role="area" Type="Self.area" Multiplicity="0..1" />
+          <End Role="client_shop" Type="Self.client_shop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="area">
+              <PropertyRef Name="area_id" />
+            </Principal>
+            <Dependent Role="client_shop">
+              <PropertyRef Name="area_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_client_shop_city">
+          <End Role="city" Type="Self.city" Multiplicity="0..1" />
+          <End Role="client_shop" Type="Self.client_shop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="city">
+              <PropertyRef Name="city_id" />
+            </Principal>
+            <Dependent Role="client_shop">
+              <PropertyRef Name="city_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_client_shop_client">
+          <End Role="client" Type="Self.client" Multiplicity="0..1" />
+          <End Role="client_shop" Type="Self.client_shop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="client_id" />
+            </Principal>
+            <Dependent Role="client_shop">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_details_orders">
+          <End Role="orders" Type="Self.orders" Multiplicity="0..1" />
+          <End Role="order_details" Type="Self.order_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="orders">
+              <PropertyRef Name="order_id" />
+            </Principal>
+            <Dependent Role="order_details">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_details_products_details">
+          <End Role="products_details" Type="Self.products_details" Multiplicity="0..1" />
+          <End Role="order_details" Type="Self.order_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="products_details">
+              <PropertyRef Name="product_details_id" />
+            </Principal>
+            <Dependent Role="order_details">
+              <PropertyRef Name="product_details_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_client_shop">
+          <End Role="client_shop" Type="Self.client_shop" Multiplicity="0..1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client_shop">
+              <PropertyRef Name="shop_id" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="shop_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_Orders_Status">
+          <End Role="Orders_Status" Type="Self.Orders_Status" Multiplicity="1" />
+          <End Role="orders" Type="Self.orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders_Status">
+              <PropertyRef Name="Orders_StatusID" />
+            </Principal>
+            <Dependent Role="orders">
+              <PropertyRef Name="Orders_StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_products_companies">
+          <End Role="companies" Type="Self.companies" Multiplicity="1" />
+          <End Role="products" Type="Self.products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="companies">
+              <PropertyRef Name="company_id" />
+            </Principal>
+            <Dependent Role="products">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_products_details_products">
+          <End Role="products" Type="Self.products" Multiplicity="0..1" />
+          <End Role="products_details" Type="Self.products_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="products">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="products_details">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="oyonnModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="area" EntityType="Self.area" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="city" EntityType="Self.city" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="client" EntityType="Self.client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="client_shop" EntityType="Self.client_shop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="client_status" EntityType="Self.client_status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="companies" EntityType="Self.companies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order_details" EntityType="Self.order_details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders_Status" EntityType="Self.Orders_Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="products_details" EntityType="Self.products_details" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_client_client_status" Association="Self.FK_client_client_status">
+            <End Role="client_status" EntitySet="client_status" />
+            <End Role="client" EntitySet="client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_client_shop_area" Association="Self.FK_client_shop_area">
+            <End Role="area" EntitySet="area" />
+            <End Role="client_shop" EntitySet="client_shop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_client_shop_city" Association="Self.FK_client_shop_city">
+            <End Role="city" EntitySet="city" />
+            <End Role="client_shop" EntitySet="client_shop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_client_shop_client" Association="Self.FK_client_shop_client">
+            <End Role="client" EntitySet="client" />
+            <End Role="client_shop" EntitySet="client_shop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_details_orders" Association="Self.FK_order_details_orders">
+            <End Role="orders" EntitySet="orders" />
+            <End Role="order_details" EntitySet="order_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_details_products_details" Association="Self.FK_order_details_products_details">
+            <End Role="products_details" EntitySet="products_details" />
+            <End Role="order_details" EntitySet="order_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_client_shop" Association="Self.FK_orders_client_shop">
+            <End Role="client_shop" EntitySet="client_shop" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_Orders_Status" Association="Self.FK_orders_Orders_Status">
+            <End Role="Orders_Status" EntitySet="Orders_Status" />
+            <End Role="orders" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_products_companies" Association="Self.FK_products_companies">
+            <End Role="companies" EntitySet="companies" />
+            <End Role="products" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_products_details_products" Association="Self.FK_products_details_products">
+            <End Role="products" EntitySet="products" />
+            <End Role="products_details" EntitySet="products_details" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="oyonnModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="oyonnEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="oyonnModel.Admin" />
+          <EntitySet Name="areas" EntityType="oyonnModel.area" />
+          <EntitySet Name="cities" EntityType="oyonnModel.city" />
+          <EntitySet Name="clients" EntityType="oyonnModel.client" />
+          <EntitySet Name="client_shop" EntityType="oyonnModel.client_shop" />
+          <EntitySet Name="client_status" EntityType="oyonnModel.client_status" />
+          <EntitySet Name="companies" EntityType="oyonnModel.company" />
+          <EntitySet Name="order_details" EntityType="oyonnModel.order_details" />
+          <EntitySet Name="orders" EntityType="oyonnModel.order" />
+          <EntitySet Name="Orders_Status" EntityType="oyonnModel.Orders_Status" />
+          <EntitySet Name="products" EntityType="oyonnModel.product" />
+          <EntitySet Name="products_details" EntityType="oyonnModel.products_details" />
+          <AssociationSet Name="FK_client_shop_area" Association="oyonnModel.FK_client_shop_area">
+            <End Role="area" EntitySet="areas" />
+            <End Role="client_shop" EntitySet="client_shop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_client_shop_city" Association="oyonnModel.FK_client_shop_city">
+            <End Role="city" EntitySet="cities" />
+            <End Role="client_shop" EntitySet="client_shop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_client_client_status" Association="oyonnModel.FK_client_client_status">
+            <End Role="client_status" EntitySet="client_status" />
+            <End Role="client" EntitySet="clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_client_shop_client" Association="oyonnModel.FK_client_shop_client">
+            <End Role="client" EntitySet="clients" />
+            <End Role="client_shop" EntitySet="client_shop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_client_shop" Association="oyonnModel.FK_orders_client_shop">
+            <End Role="client_shop" EntitySet="client_shop" />
+            <End Role="order" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_products_companies" Association="oyonnModel.FK_products_companies">
+            <End Role="company" EntitySet="companies" />
+            <End Role="product" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_details_orders" Association="oyonnModel.FK_order_details_orders">
+            <End Role="order" EntitySet="orders" />
+            <End Role="order_details" EntitySet="order_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_details_products_details" Association="oyonnModel.FK_order_details_products_details">
+            <End Role="products_details" EntitySet="products_details" />
+            <End Role="order_details" EntitySet="order_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_orders_Orders_Status" Association="oyonnModel.FK_orders_Orders_Status">
+            <End Role="Orders_Status" EntitySet="Orders_Status" />
+            <End Role="order" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_products_details_products" Association="oyonnModel.FK_products_details_products">
+            <End Role="product" EntitySet="products" />
+            <End Role="products_details" EntitySet="products_details" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Adminid" />
+          </Key>
+          <Property Name="Adminid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdminName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="loginDate" Type="DateTime" Precision="3" />
+          <Property Name="login_time" Type="Time" Precision="7" />
+        </EntityType>
+        <EntityType Name="area">
+          <Key>
+            <PropertyRef Name="area_id" />
+          </Key>
+          <Property Name="area_id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="area_name" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="client_shop" Relationship="oyonnModel.FK_client_shop_area" FromRole="area" ToRole="client_shop" />
+        </EntityType>
+        <EntityType Name="city">
+          <Key>
+            <PropertyRef Name="city_id" />
+          </Key>
+          <Property Name="city_id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="city_name" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="client_shop" Relationship="oyonnModel.FK_client_shop_city" FromRole="city" ToRole="client_shop" />
+        </EntityType>
+        <EntityType Name="client">
+          <Key>
+            <PropertyRef Name="client_id" />
+          </Key>
+          <Property Name="client_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="client_status_id" Type="Byte" />
+          <Property Name="client_name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="client_mobile" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="client_location" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="client_registration_date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="client_status" Relationship="oyonnModel.FK_client_client_status" FromRole="client" ToRole="client_status" />
+          <NavigationProperty Name="client_shop" Relationship="oyonnModel.FK_client_shop_client" FromRole="client" ToRole="client_shop" />
+        </EntityType>
+        <EntityType Name="client_shop">
+          <Key>
+            <PropertyRef Name="shop_id" />
+          </Key>
+          <Property Name="shop_id" Type="Int32" Nullable="false" />
+          <Property Name="client_id" Type="Int32" />
+          <Property Name="shop_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="shop_img" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+          <Property Name="area_id" Type="Int16" />
+          <Property Name="city_id" Type="Int16" />
+          <Property Name="Shop_mobile" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="shop_phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="shop_address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="area" Relationship="oyonnModel.FK_client_shop_area" FromRole="client_shop" ToRole="area" />
+          <NavigationProperty Name="city" Relationship="oyonnModel.FK_client_shop_city" FromRole="client_shop" ToRole="city" />
+          <NavigationProperty Name="client" Relationship="oyonnModel.FK_client_shop_client" FromRole="client_shop" ToRole="client" />
+          <NavigationProperty Name="orders" Relationship="oyonnModel.FK_orders_client_shop" FromRole="client_shop" ToRole="order" />
+        </EntityType>
+        <EntityType Name="client_status">
+          <Key>
+            <PropertyRef Name="client_status_id" />
+          </Key>
+          <Property Name="client_status_id" Type="Byte" Nullable="false" />
+          <Property Name="client_status1" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="clients" Relationship="oyonnModel.FK_client_client_status" FromRole="client_status" ToRole="client" />
+        </EntityType>
+        <EntityType Name="company">
+          <Key>
+            <PropertyRef Name="company_id" />
+          </Key>
+          <Property Name="company_id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_name_ar" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="company_name_en" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="company_img" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="company_phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="company_mobile" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="company_address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="products" Relationship="oyonnModel.FK_products_companies" FromRole="company" ToRole="product" />
+        </EntityType>
+        <EntityType Name="order_details">
+          <Key>
+            <PropertyRef Name="order_details_id" />
+          </Key>
+          <Property Name="order_details_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_id" Type="Int64" />
+          <Property Name="product_details_id" Type="Int32" />
+          <Property Name="order_quantity" Type="Byte" />
+          <Property Name="order_price" Type="Decimal" Precision="8" Scale="2" />
+          <NavigationProperty Name="order" Relationship="oyonnModel.FK_order_details_orders" FromRole="order_details" ToRole="order" />
+          <NavigationProperty Name="products_details" Relationship="oyonnModel.FK_order_details_products_details" FromRole="order_details" ToRole="products_details" />
+        </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="order_id" />
+          </Key>
+          <Property Name="order_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="shop_id" Type="Int32" />
+          <Property Name="total_orders_price" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="order_date" Type="DateTime" Precision="0" />
+          <Property Name="order_time" Type="Time" Precision="7" />
+          <Property Name="order_delivery_date" Type="DateTime" Precision="0" />
+          <Property Name="order_delivery_time" Type="Time" Precision="7" />
+          <Property Name="Orders_StatusID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="client_shop" Relationship="oyonnModel.FK_orders_client_shop" FromRole="order" ToRole="client_shop" />
+          <NavigationProperty Name="order_details" Relationship="oyonnModel.FK_order_details_orders" FromRole="order" ToRole="order_details" />
+          <NavigationProperty Name="Orders_Status" Relationship="oyonnModel.FK_orders_Orders_Status" FromRole="order" ToRole="Orders_Status" />
+        </EntityType>
+        <EntityType Name="Orders_Status">
+          <Key>
+            <PropertyRef Name="Orders_StatusID" />
+          </Key>
+          <Property Name="Orders_StatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="orders" Relationship="oyonnModel.FK_orders_Orders_Status" FromRole="Orders_Status" ToRole="order" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="product_id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_name_ar" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="product_name_en" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="company_id" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="company" Relationship="oyonnModel.FK_products_companies" FromRole="product" ToRole="company" />
+          <NavigationProperty Name="products_details" Relationship="oyonnModel.FK_products_details_products" FromRole="product" ToRole="products_details" />
+        </EntityType>
+        <EntityType Name="products_details">
+          <Key>
+            <PropertyRef Name="product_details_id" />
+          </Key>
+          <Property Name="product_details_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_id" Type="Int16" />
+          <Property Name="product_name_ar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="product_name_en" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="product_img" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="product_quantity" Type="Int32" />
+          <Property Name="product_price" Type="Decimal" Precision="8" Scale="2" />
+          <NavigationProperty Name="order_details" Relationship="oyonnModel.FK_order_details_products_details" FromRole="products_details" ToRole="order_details" />
+          <NavigationProperty Name="product" Relationship="oyonnModel.FK_products_details_products" FromRole="products_details" ToRole="product" />
+        </EntityType>
+        <Association Name="FK_client_shop_area">
+          <End Type="oyonnModel.area" Role="area" Multiplicity="0..1" />
+          <End Type="oyonnModel.client_shop" Role="client_shop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="area">
+              <PropertyRef Name="area_id" />
+            </Principal>
+            <Dependent Role="client_shop">
+              <PropertyRef Name="area_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_client_shop_city">
+          <End Type="oyonnModel.city" Role="city" Multiplicity="0..1" />
+          <End Type="oyonnModel.client_shop" Role="client_shop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="city">
+              <PropertyRef Name="city_id" />
+            </Principal>
+            <Dependent Role="client_shop">
+              <PropertyRef Name="city_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_client_client_status">
+          <End Type="oyonnModel.client_status" Role="client_status" Multiplicity="0..1" />
+          <End Type="oyonnModel.client" Role="client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client_status">
+              <PropertyRef Name="client_status_id" />
+            </Principal>
+            <Dependent Role="client">
+              <PropertyRef Name="client_status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_client_shop_client">
+          <End Type="oyonnModel.client" Role="client" Multiplicity="0..1" />
+          <End Type="oyonnModel.client_shop" Role="client_shop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="client_id" />
+            </Principal>
+            <Dependent Role="client_shop">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_client_shop">
+          <End Type="oyonnModel.client_shop" Role="client_shop" Multiplicity="0..1" />
+          <End Type="oyonnModel.order" Role="order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client_shop">
+              <PropertyRef Name="shop_id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="shop_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_products_companies">
+          <End Type="oyonnModel.company" Role="company" Multiplicity="1" />
+          <End Type="oyonnModel.product" Role="product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="company">
+              <PropertyRef Name="company_id" />
+            </Principal>
+            <Dependent Role="product">
+              <PropertyRef Name="company_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_details_orders">
+          <End Type="oyonnModel.order" Role="order" Multiplicity="0..1" />
+          <End Type="oyonnModel.order_details" Role="order_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order">
+              <PropertyRef Name="order_id" />
+            </Principal>
+            <Dependent Role="order_details">
+              <PropertyRef Name="order_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_details_products_details">
+          <End Type="oyonnModel.products_details" Role="products_details" Multiplicity="0..1" />
+          <End Type="oyonnModel.order_details" Role="order_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="products_details">
+              <PropertyRef Name="product_details_id" />
+            </Principal>
+            <Dependent Role="order_details">
+              <PropertyRef Name="product_details_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_orders_Orders_Status">
+          <End Type="oyonnModel.Orders_Status" Role="Orders_Status" Multiplicity="1" />
+          <End Type="oyonnModel.order" Role="order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders_Status">
+              <PropertyRef Name="Orders_StatusID" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="Orders_StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_products_details_products">
+          <End Type="oyonnModel.product" Role="product" Multiplicity="0..1" />
+          <End Type="oyonnModel.products_details" Role="products_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="product_id" />
+            </Principal>
+            <Dependent Role="products_details">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="oyonnModelStoreContainer" CdmEntityContainer="oyonnEntities">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="oyonnModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="login_time" ColumnName="login_time" />
+                <ScalarProperty Name="loginDate" ColumnName="loginDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AdminName" ColumnName="AdminName" />
+                <ScalarProperty Name="Adminid" ColumnName="Adminid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="areas">
+            <EntityTypeMapping TypeName="oyonnModel.area">
+              <MappingFragment StoreEntitySet="area">
+                <ScalarProperty Name="area_name" ColumnName="area_name" />
+                <ScalarProperty Name="area_id" ColumnName="area_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cities">
+            <EntityTypeMapping TypeName="oyonnModel.city">
+              <MappingFragment StoreEntitySet="city">
+                <ScalarProperty Name="city_name" ColumnName="city_name" />
+                <ScalarProperty Name="city_id" ColumnName="city_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="clients">
+            <EntityTypeMapping TypeName="oyonnModel.client">
+              <MappingFragment StoreEntitySet="client">
+                <ScalarProperty Name="client_registration_date" ColumnName="client_registration_date" />
+                <ScalarProperty Name="client_location" ColumnName="client_location" />
+                <ScalarProperty Name="client_mobile" ColumnName="client_mobile" />
+                <ScalarProperty Name="client_name" ColumnName="client_name" />
+                <ScalarProperty Name="client_status_id" ColumnName="client_status_id" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="client_shop">
+            <EntityTypeMapping TypeName="oyonnModel.client_shop">
+              <MappingFragment StoreEntitySet="client_shop">
+                <ScalarProperty Name="shop_address" ColumnName="shop_address" />
+                <ScalarProperty Name="shop_phone" ColumnName="shop_phone" />
+                <ScalarProperty Name="Shop_mobile" ColumnName="Shop_mobile" />
+                <ScalarProperty Name="city_id" ColumnName="city_id" />
+                <ScalarProperty Name="area_id" ColumnName="area_id" />
+                <ScalarProperty Name="shop_img" ColumnName="shop_img" />
+                <ScalarProperty Name="shop_Name" ColumnName="shop_Name" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="shop_id" ColumnName="shop_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="client_status">
+            <EntityTypeMapping TypeName="oyonnModel.client_status">
+              <MappingFragment StoreEntitySet="client_status">
+                <ScalarProperty Name="client_status1" ColumnName="client_status" />
+                <ScalarProperty Name="client_status_id" ColumnName="client_status_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="companies">
+            <EntityTypeMapping TypeName="oyonnModel.company">
+              <MappingFragment StoreEntitySet="companies">
+                <ScalarProperty Name="company_address" ColumnName="company_address" />
+                <ScalarProperty Name="company_mobile" ColumnName="company_mobile" />
+                <ScalarProperty Name="company_phone" ColumnName="company_phone" />
+                <ScalarProperty Name="company_img" ColumnName="company_img" />
+                <ScalarProperty Name="company_name_en" ColumnName="company_name_en" />
+                <ScalarProperty Name="company_name_ar" ColumnName="company_name_ar" />
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order_details">
+            <EntityTypeMapping TypeName="oyonnModel.order_details">
+              <MappingFragment StoreEntitySet="order_details">
+                <ScalarProperty Name="order_price" ColumnName="order_price" />
+                <ScalarProperty Name="order_quantity" ColumnName="order_quantity" />
+                <ScalarProperty Name="product_details_id" ColumnName="product_details_id" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="order_details_id" ColumnName="order_details_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orders">
+            <EntityTypeMapping TypeName="oyonnModel.order">
+              <MappingFragment StoreEntitySet="orders">
+                <ScalarProperty Name="Orders_StatusID" ColumnName="Orders_StatusID" />
+                <ScalarProperty Name="order_delivery_time" ColumnName="order_delivery_time" />
+                <ScalarProperty Name="order_delivery_date" ColumnName="order_delivery_date" />
+                <ScalarProperty Name="order_time" ColumnName="order_time" />
+                <ScalarProperty Name="order_date" ColumnName="order_date" />
+                <ScalarProperty Name="total_orders_price" ColumnName="total_orders_price" />
+                <ScalarProperty Name="shop_id" ColumnName="shop_id" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders_Status">
+            <EntityTypeMapping TypeName="oyonnModel.Orders_Status">
+              <MappingFragment StoreEntitySet="Orders_Status">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Orders_StatusID" ColumnName="Orders_StatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="oyonnModel.product">
+              <MappingFragment StoreEntitySet="products">
+                <ScalarProperty Name="company_id" ColumnName="company_id" />
+                <ScalarProperty Name="product_name_en" ColumnName="product_name_en" />
+                <ScalarProperty Name="product_name_ar" ColumnName="product_name_ar" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="products_details">
+            <EntityTypeMapping TypeName="oyonnModel.products_details">
+              <MappingFragment StoreEntitySet="products_details">
+                <ScalarProperty Name="product_price" ColumnName="product_price" />
+                <ScalarProperty Name="product_quantity" ColumnName="product_quantity" />
+                <ScalarProperty Name="product_img" ColumnName="product_img" />
+                <ScalarProperty Name="product_name_en" ColumnName="product_name_en" />
+                <ScalarProperty Name="product_name_ar" ColumnName="product_name_ar" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="product_details_id" ColumnName="product_details_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

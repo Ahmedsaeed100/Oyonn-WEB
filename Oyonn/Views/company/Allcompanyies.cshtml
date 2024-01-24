@@ -1,0 +1,43 @@
+﻿@using OyonnBL.DTO;
+@model IEnumerable<companyDTO>
+<table class="table table-striped" id="datable_1">
+    <thead>
+        <tr>
+            <th>الاسم بالعربي</th>
+            <th>الاسم بالانجلزية</th>
+            <th>رقم الهاتف</th>
+            <th>رقم موبيل</th>
+            <th>باقي التفاصيل</th>
+            <th>التحكم</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(MODELitem => item.company_name_ar)</td>
+                <td>@Html.DisplayFor(MODELitem => item.company_name_en)</td>
+                <td>@Html.DisplayFor(MODELitem => item.company_phone)</td>
+                <td>@Html.DisplayFor(MODELitem => item.company_mobile)</td>
+
+
+                <td><button type="button" class="btn btn-default waves-effect m-r-20" data-toggle="modal" data-target="#largeModal" onclick="GetCompanyDetails(@item.company_id)">اظهار</button></td>
+                <td>
+
+
+                    <button type="button" class="btn bg-blue" onclick="GetcompanyData(@item.company_id)">تعديل</button>
+                    <button type="button" class="btn bg-red js-delete" data-id="@item.company_id" id="deletebtn">حذف</button>
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+<script type="text/javascript">
+    $(function () {
+
+        $('#datable_1').DataTable();
+    });
+
+    Delete();
+</script>
